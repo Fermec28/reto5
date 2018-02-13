@@ -6,14 +6,13 @@ class Pregunta
 		@answer= answer		
 	end
 
-	def iscorrect(answer)		
+	def iscorrect(answer)			
 		self.answer == answer ? true : false        
 	end	
 end
 
 class Game
-	def initialize (intentos)
-		@intentos=intentos
+	def initialize
 		@preguntas= readerFile()		
 		start()
 	end
@@ -21,7 +20,7 @@ class Game
 	def readerFile
 		preguntas =[]
 		File.open('Preguntas.csv', 'r') do |f1|
-  			while line = f1.gets  
+  			while line = f1.gets
   				preguntas <<Pregunta.new(line.split(";")[0],line.split(";")[1])   			
   			end  
 		end
@@ -29,10 +28,18 @@ class Game
 	end
 
 	def start
+		puts "Hola, Empezara el Juego solo debes contestar adecuadamente..."
+
 		@preguntas.each do |pregunta|
-			
+			loop do
+				puts "Definicion: "
+				puts pregunta.question
+				break if pregunta.iscorrect(gets.chomp+"\n")
+			end		
 		end
+
+		puts "Game Over"
 	end
 end
 
-juego = Game.new(4)
+juego = Game.new
