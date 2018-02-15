@@ -35,9 +35,12 @@ class Game
 				puts "Definicion: "
 				puts pregunta.question
 				break if pregunta.iscorrect(gets.chomp+"\n")
-			end		
-		end
+				puts "Ups...seguro?, intenta de Nuevo"
+			end	
+				puts"Es correcto"
 
+		end
+		
 		puts "Game Over"
 	end
 end
